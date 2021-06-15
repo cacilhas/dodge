@@ -1,10 +1,11 @@
 extends Node
 
-export(PackedScene) var Mob
+const STORAGE := "user://dodge.json"
+
+export var Mob: PackedScene
+
 var score: int
 var highscore := 0
-
-const STORAGE := "user://dodge.json"
 
 
 func _ready() -> void:

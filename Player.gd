@@ -2,14 +2,15 @@ extends Area2D
 
 signal hit
 
-export(int) var speed := 400
-export(int) var width := 0
-export(int) var height := 0
-var screen_size: Vector2
-var touch: Vector2
-
 const NULL_VECTOR := Vector2(-1, -1)
 const DEVIATION := 5
+
+export var speed := 400
+export var width := 0
+export var height := 0
+
+var screen_size: Vector2
+var touch: Vector2
 
 
 func _ready() -> void:
@@ -41,12 +42,6 @@ func _process(delta: float) -> void:
 		$AnimatedSprite.stop()
 
 	reset_touch(velocity)
-
-
-func _on_Player_body_entered(_body) -> void:
-	hide()
-	emit_signal("hit")
-	$CollisionShape2D.set_deferred("disabled", true)
 
 
 func move_character(velocity: Vector2) -> void:
@@ -98,3 +93,9 @@ func start(pos: Vector2) -> void:
 	reset_touch()
 	show()
 	$CollisionShape2D.disabled = false
+
+
+func _on_Player_body_entered(_body) -> void:
+	hide()
+	emit_signal("hit")
+	$CollisionShape2D.set_deferred("disabled", true)

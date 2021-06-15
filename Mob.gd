@@ -1,6 +1,5 @@
-extends RigidBody2D
-
 class_name Mob
+extends RigidBody2D
 
 var min_speed := 150
 var max_speed := 250
@@ -11,10 +10,6 @@ func _ready() -> void:
 	var mob_types = $AnimatedSprite.frames.get_animation_names()
 	type = mob_types[randi() % mob_types.size()]
 	$AnimatedSprite.animation = type
-
-
-func _on_VisibilityNotifier2D_screen_exited() -> void:
-	queue_free()
 
 
 func start(location: PathFollow2D) -> void:
@@ -30,3 +25,7 @@ func flip(yes: bool) -> float:
 	$AnimatedSprite.flip_h = true
 	$AnimatedSprite.flip_v = yes == (type == "walk")
 	return PI / 2
+
+
+func _on_VisibilityNotifier2D_screen_exited() -> void:
+	queue_free()
